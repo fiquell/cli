@@ -16,13 +16,13 @@ const scripts = {
 >;
 
 export const main = async () => {
-  const { script } = await prompts({
+  const { script }: { script: string } = await prompts({
     type: "autocomplete",
     name: "script",
     message: "Which script would you like to run?",
     choices: Object.entries(scripts).map(([value, script]) => ({
-      value,
       title: script.title,
+      value,
     })),
   });
 

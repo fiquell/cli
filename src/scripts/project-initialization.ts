@@ -4,7 +4,7 @@ import { exec } from "../utils/exec";
 export const projectInitialization = {
   title: "Project Initialization",
   run: async () => {
-    const { pnpm } = await prompts({
+    const { pnpm }: { pnpm: string } = await prompts({
       type: "toggle",
       name: "pnpm",
       message: "Would you like to use pnpm for installation?",

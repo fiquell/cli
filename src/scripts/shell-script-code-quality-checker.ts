@@ -5,7 +5,7 @@ import { exec } from "../utils/exec";
 export const shellScriptCodeQualityChecker = {
   title: "Shell Script Code Quality Checker",
   run: async () => {
-    const { selected } = await prompts({
+    const { selected }: { selected: string[] } = await prompts({
       type: "multiselect",
       name: "selected",
       message: "Pick files for code quality check",
@@ -13,19 +13,15 @@ export const shellScriptCodeQualityChecker = {
         .readdirSync(process.cwd())
         .filter((file) => fs.statSync(file).isFile())
         .map((file) => ({
-          value: file,
           title: file,
+          value: file,
         })),
     });
 
-    if (selected) {
-      selected.map((file: string) => {
-        exec(`shellharden --replace ${file}`);
-        exec(`shfmt --write --indent 2 ${file}`);
-        exec(`shellcheck ${file}`);
-      });
-    } else {
-      process.exit(0);
-    }
+    selected.map((file) => {
+      exec(`shellharden --replace ${file}`);
+      exec(`shfmt --write --indent 2 ${file}`);
+      exec(`shellcheck ${file}`);
+    });
   },
 };
