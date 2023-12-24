@@ -6,14 +6,14 @@ export const textTransformer = {
     const { originalText }: { originalText: string } = await prompts({
       type: "text",
       name: "originalText",
-      message: "Enter the text you want to transform:",
+      message: "Enter the text you want to transform",
     });
 
     const { transformationType }: { transformationType: string } =
       await prompts({
         type: "select",
         name: "transformationType",
-        message: "Choose a transformation:",
+        message: "Choose a transformation",
         choices: [
           { title: "Transform to Kebab Case", value: "kebabcase" },
           { title: "Transform to Lower Case", value: "lowercase" },
@@ -45,7 +45,8 @@ export const textTransformer = {
         transformedText = originalText
           .split(" ")
           .map(
-            (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+            (word) =>
+              word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
           )
           .join(" ");
         break;
