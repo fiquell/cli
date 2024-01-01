@@ -1,11 +1,12 @@
 import prompts from "prompts";
+import { copy } from "../commands/copy";
 
 export const textTransformer = {
   title: "Text Transformer",
   run: async () => {
-    const { originalText }: { originalText: string } = await prompts({
+    const { inputText }: { inputText: string } = await prompts({
       type: "text",
-      name: "originalText",
+      name: "inputText",
       message: "Enter the text you want to transform",
     });
 
@@ -27,22 +28,22 @@ export const textTransformer = {
 
     switch (transformationType) {
       case "kebabcase":
-        transformedText = originalText
+        transformedText = inputText
           .split(" ")
           .map((word) => word.toLowerCase())
           .join("-");
         break;
       case "lowercase":
-        transformedText = originalText.toLowerCase();
+        transformedText = inputText.toLowerCase();
         break;
       case "snakecase":
-        transformedText = originalText
+        transformedText = inputText
           .split(" ")
           .map((word) => word.toLowerCase())
           .join("_");
         break;
       case "titlecase":
-        transformedText = originalText
+        transformedText = inputText
           .split(" ")
           .map(
             (word) =>
@@ -51,13 +52,27 @@ export const textTransformer = {
           .join(" ");
         break;
       case "uppercase":
-        transformedText = originalText.toUpperCase();
+        transformedText = inputText.toUpperCase();
         break;
       default:
-        transformedText = originalText;
+        transformedText = inputText;
         break;
     }
 
-    console.log(transformedText);
+    const { shouldCopy }: { shouldCopy: boolean } = await prompts({
+      type: "toggle",
+      name: "shouldCopy",
+      message: "Would you like to copy the result?",
+      initial: true,
+      active: "yes",
+      inactive: "no",
+    });
+
+    if (shouldCopy) {
+      copy(transformedText);
+      console.log(transformedText);
+    } else {
+      console.log(transformedText);
+    }
   },
 };
