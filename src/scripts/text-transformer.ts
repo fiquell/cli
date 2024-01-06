@@ -1,78 +1,76 @@
 import prompts from "prompts";
-import { copy } from "../commands/copy";
+import {
+  camelCase,
+  kebabCase,
+  lowerCase,
+  snakeCase,
+  titleCase,
+  upperCase,
+} from "string-ts";
+import { exec } from "../utils/exec";
 
 export const textTransformer = {
   title: "Text Transformer",
   run: async () => {
-    const { inputText }: { inputText: string } = await prompts({
+    const responseInput = await prompts({
       type: "text",
-      name: "inputText",
+      name: "input",
       message: "Enter the text you want to transform",
     });
 
-    const { transformationType }: { transformationType: string } =
-      await prompts({
-        type: "select",
-        name: "transformationType",
-        message: "Choose a transformation",
-        choices: [
-          { title: "Transform to Kebab Case", value: "kebabcase" },
-          { title: "Transform to Lower Case", value: "lowercase" },
-          { title: "Transform to Snake Case", value: "snakecase" },
-          { title: "Transform to Title Case", value: "titlecase" },
-          { title: "Transform to Upper Case", value: "uppercase" },
-        ],
-      });
+    const responseOptions = await prompts({
+      type: "select",
+      name: "options",
+      message: "Choose a transformation",
+      choices: [
+        { title: "Transform to Camel Case", value: "camelcase" },
+        { title: "Transform to Kebab Case", value: "kebabcase" },
+        { title: "Transform to Lower Case", value: "lowercase" },
+        { title: "Transform to Snake Case", value: "snakecase" },
+        { title: "Transform to Title Case", value: "titlecase" },
+        { title: "Transform to Upper Case", value: "uppercase" },
+      ],
+    });
 
     let transformedText: string;
 
-    switch (transformationType) {
+    switch (responseOptions.options) {
+      case "camelcase":
+        transformedText = camelCase(responseInput.input);
+        break;
       case "kebabcase":
-        transformedText = inputText
-          .split(" ")
-          .map((word) => word.toLowerCase())
-          .join("-");
+        transformedText = kebabCase(responseInput.input);
         break;
       case "lowercase":
-        transformedText = inputText.toLowerCase();
+        transformedText = lowerCase(responseInput.input);
         break;
       case "snakecase":
-        transformedText = inputText
-          .split(" ")
-          .map((word) => word.toLowerCase())
-          .join("_");
+        transformedText = snakeCase(responseInput.input);
         break;
       case "titlecase":
-        transformedText = inputText
-          .split(" ")
-          .map(
-            (word) =>
-              word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
-          )
-          .join(" ");
+        transformedText = titleCase(responseInput.input);
         break;
       case "uppercase":
-        transformedText = inputText.toUpperCase();
+        transformedText = upperCase(responseInput.input);
         break;
       default:
-        transformedText = inputText;
+        transformedText = responseInput.input;
         break;
     }
 
-    const { shouldCopy }: { shouldCopy: boolean } = await prompts({
+    const responseCopy = await prompts({
       type: "toggle",
-      name: "shouldCopy",
+      name: "copy",
       message: "Would you like to copy the result?",
       initial: true,
       active: "yes",
       inactive: "no",
     });
 
-    if (shouldCopy) {
-      copy(transformedText);
-      console.log(transformedText);
-    } else {
-      console.log(transformedText);
+    if (responseCopy.copy) {
+      exec(`echo ${transformedText} | xclip -selection clipboard`);
     }
+
+    console.log(transformedText);
   },
 };
