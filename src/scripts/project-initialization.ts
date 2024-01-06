@@ -4,7 +4,7 @@ import { exec } from "../utils/exec";
 export const projectInitialization = {
   title: "Project Initialization",
   run: async () => {
-    const { pnpm }: { pnpm: boolean } = await prompts({
+    const response = await prompts({
       type: "toggle",
       name: "pnpm",
       message: "Would you like to use pnpm for installation?",
@@ -15,7 +15,7 @@ export const projectInitialization = {
 
     exec("git init");
 
-    if (pnpm) {
+    if (response.pnpm) {
       exec("pnpm init");
       exec("pnpm add -D typescript @types/node");
       exec("node_modules/.bin/tsc --init");

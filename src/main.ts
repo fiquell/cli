@@ -14,7 +14,7 @@ const scripts = {
 >;
 
 export const main = async () => {
-  const { script }: { script: string } = await prompts({
+  const response = await prompts({
     type: "autocomplete",
     name: "script",
     message: "Which script would you like to run?",
@@ -24,9 +24,9 @@ export const main = async () => {
     })),
   });
 
-  if (script) {
-    await scripts[script as keyof typeof scripts].run();
-  } else {
+  if (!response.script) {
     process.exit(0);
   }
+
+  await scripts[response.script as keyof typeof scripts].run();
 };
