@@ -1,11 +1,9 @@
 import prompts from "prompts";
 import { projectInitialization } from "./scripts/project-initialization";
-import { shellScriptCodeQualityChecker } from "./scripts/shell-script-code-quality-checker";
 import { textTransformer } from "./scripts/text-transformer";
 
 const scripts = {
   projectInitialization,
-  shellScriptCodeQualityChecker,
   textTransformer,
 } satisfies Record<
   string,
