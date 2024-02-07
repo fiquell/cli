@@ -1,5 +1,5 @@
 import prompts from "prompts";
-import { exec } from "../utils/exec";
+import { exec } from "~/utils/exec";
 
 export const projectInitialization = {
   title: "Project Initialization",

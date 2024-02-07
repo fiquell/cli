@@ -1,6 +1,6 @@
 import prompts from "prompts";
-import { projectInitialization } from "./scripts/project-initialization";
-import { textTransformer } from "./scripts/text-transformer";
+import { projectInitialization } from "~/scripts/project-initialization";
+import { textTransformer } from "~/scripts/text-transformer";
 
 const scripts = {
   projectInitialization,

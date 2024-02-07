@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { copy } from "./commands/copy";
-import { main } from "./main";
+import { copy } from "~/commands/copy";
+import { main } from "~/main";
 
 const program = new Command();
 

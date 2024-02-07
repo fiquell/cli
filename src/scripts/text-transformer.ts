@@ -7,7 +7,7 @@ import {
   titleCase,
   upperCase,
 } from "string-ts";
-import { exec } from "../utils/exec";
+import { exec } from "~/utils/exec";
 
 export const textTransformer = {
   title: "Text Transformer",
