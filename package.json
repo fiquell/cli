@@ -11,9 +11,9 @@
     "string-ts": "^2.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.10.5",
+    "@types/node": "^20.11.20",
     "@types/prompts": "^2.4.9",
-    "tsup": "^8.0.1",
+    "tsup": "^8.0.2",
     "typescript": "^5.3.3"
   }
 }
