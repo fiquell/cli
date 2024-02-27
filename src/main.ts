@@ -2,15 +2,9 @@ import prompts from "prompts";
 import { projectInitialization } from "~/scripts/project-initialization";
 import { textTransformer } from "~/scripts/text-transformer";
 
-const scripts = {
-  projectInitialization,
-  textTransformer,
-} satisfies Record<
+const scripts = { projectInitialization, textTransformer } satisfies Record<
   string,
-  {
-    title: string;
-    run: () => Promise<void>;
-  }
+  { title: string; run: () => Promise<void> }
 >;
 
 export const main = async () => {
