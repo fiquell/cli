@@ -1,11 +1,13 @@
 import prompts from "prompts"
 import { projectInitialization } from "~/scripts/project-initialization"
+import { scalingFactor } from "~/scripts/scaling-factor"
 import { textTransformer } from "~/scripts/text-transformer"
 
-const scripts = { projectInitialization, textTransformer } satisfies Record<
-    string,
-    { title: string; run: () => Promise<void> }
->
+const scripts = {
+    projectInitialization,
+    scalingFactor,
+    textTransformer
+} satisfies Record<string, { title: string; run: () => Promise<void> }>
 
 export const main = async () => {
     const response = await prompts({
