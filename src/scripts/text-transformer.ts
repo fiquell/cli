@@ -1,12 +1,5 @@
 import prompts from "prompts"
-import {
-    camelCase,
-    kebabCase,
-    lowerCase,
-    snakeCase,
-    titleCase,
-    upperCase
-} from "string-ts"
+import { camelCase, kebabCase, lowerCase, snakeCase, titleCase, upperCase } from "string-ts"
 import { exec } from "~/utils/exec"
 
 export const textTransformer = {
@@ -15,7 +8,7 @@ export const textTransformer = {
         const responseInput = await prompts({
             type: "text",
             name: "input",
-            message: "Enter the text you want to transform"
+            message: "Enter the text you want to transform",
         })
 
         const responseOptions = await prompts({
@@ -28,8 +21,8 @@ export const textTransformer = {
                 { title: "Transform to Lower Case", value: "lowercase" },
                 { title: "Transform to Snake Case", value: "snakecase" },
                 { title: "Transform to Title Case", value: "titlecase" },
-                { title: "Transform to Upper Case", value: "uppercase" }
-            ]
+                { title: "Transform to Upper Case", value: "uppercase" },
+            ],
         })
 
         let transformedText: string
@@ -64,7 +57,7 @@ export const textTransformer = {
             message: "Would you like to copy the result?",
             initial: true,
             active: "yes",
-            inactive: "no"
+            inactive: "no",
         })
 
         if (responseCopy.copy) {
@@ -72,5 +65,5 @@ export const textTransformer = {
         }
 
         console.log(transformedText)
-    }
+    },
 }

@@ -6,8 +6,14 @@ import { textTransformer } from "~/scripts/text-transformer"
 const scripts = {
     projectInitialization,
     scalingFactor,
-    textTransformer
-} satisfies Record<string, { title: string; run: () => Promise<void> }>
+    textTransformer,
+} satisfies Record<
+    string,
+    {
+        title: string
+        run: () => Promise<void>
+    }
+>
 
 export const main = async () => {
     const response = await prompts({
@@ -16,8 +22,8 @@ export const main = async () => {
         message: "Which script would you like to run?",
         choices: Object.entries(scripts).map(([value, script]) => ({
             title: script.title,
-            value
-        }))
+            value,
+        })),
     })
 
     if (!response.script) {

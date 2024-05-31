@@ -10,7 +10,7 @@ export const projectInitialization = {
             message: "Would you like to use pnpm for installation?",
             initial: true,
             active: "yes",
-            inactive: "no"
+            inactive: "no",
         })
 
         exec("git init")
@@ -27,5 +27,5 @@ export const projectInitialization = {
         exec("mkdir src")
         exec("touch src/index.ts")
         exec("echo 'node_modules' > .gitignore")
-    }
+    },
 }
