@@ -1,8 +1,8 @@
-/** @type {import("prettier").Config} */
+/** @type {import('prettier').Config} */
 const config = {
-    printWidth: 120,
-    semi: false,
-    tabWidth: 4,
+  semi: false,
+  singleQuote: true,
+  trailingComma: 'es5',
 }
 
 export default config

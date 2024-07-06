@@ -1,5 +1,5 @@
-import { exec } from "~/utils/exec"
+import { exec } from '~/utils/exec'
 
 export const copy = () => {
-    exec("xclip -selection clipboard")
+  exec('xclip -selection clipboard')
 }
